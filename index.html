@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hey You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 200vh;
+      background-color: #0a0a0a;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #ff4444;
+      filter: drop-shadow(0 0 10px #ff4444aa);
+      transition: opacity 1s ease-in-out;
+    }
+
+    .rose {
+      margin-top: 30px;
+      width: 150px;
+      height: 150px;
+      position: relative;
+      transform: scale(0.6);
+      filter: blur(2px) brightness(1.3);
+      opacity: 0.2;
+      transition: all 2s ease-in-out;
+    }
+
+    .petal {
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle at center, #ff2c4d, #8b0000);
+      border-radius: 50% 50% 0 0;
+      position: absolute;
+      top: 45px;
+      left: 45px;
+      transform-origin: bottom center;
+      opacity: 0;
+    }
+
+    .petal:nth-child(1) { transform: rotate(0deg) translateY(-50px); }
+    .petal:nth-child(2) { transform: rotate(45deg) translateY(-50px); }
+    .petal:nth-child(3) { transform: rotate(90deg) translateY(-50px); }
+    .petal:nth-child(4) { transform: rotate(135deg) translateY(-50px); }
+    .petal:nth-child(5) { transform: rotate(180deg) translateY(-50px); }
+    .petal:nth-child(6) { transform: rotate(225deg) translateY(-50px); }
+    .petal:nth-child(7) { transform: rotate(270deg) translateY(-50px); }
+    .petal:nth-child(8) { transform: rotate(315deg) translateY(-50px); }
+
+    .bloomed .petal {
+      animation: bloom 2s forwards ease-in-out;
+    }
+
+    .bloomed .rose {
+      opacity: 1;
+      filter: blur(0px) brightness(1.8) drop-shadow(0 0 15px #ff2c4daa);
+      transform: scale(1);
+    }
+
+    @keyframes bloom {
+      0% { opacity: 0; transform: scale(0.3) rotate(var(--rotate)) translateY(-50px); }
+      100% { opacity: 1; transform: scale(1) rotate(var(--rotate)) translateY(-50px); }
+    }
+
+    .message {
+      margin-top: 30px;
+      font-size: 1.2em;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .show-message .message {
+      opacity: 1;
+      filter: drop-shadow(0 0 8px #fff);
+    }
+
+    .heart {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.5rem;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      filter: drop-shadow(0 0 8px red);
+      animation: none;
+    }
+
+    .bloomed .heart {
+      opacity: 1;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.2); }
+      100% { transform: translateX(-50%) scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="content">
+    <h1>Scroll down slowly...</h1>
+
+    <div class="rose" id="rose">
+      <div class="petal" style="--rotate: 0deg;"></div>
+      <div class="petal" style="--rotate: 45deg;"></div>
+      <div class="petal" style="--rotate: 90deg;"></div>
+      <div class="petal" style="--rotate: 135deg;"></div>
+      <div class="petal" style="--rotate: 180deg;"></div>
+      <div class="petal" style="--rotate: 225deg;"></div>
+      <div class="petal" style="--rotate: 270deg;"></div>
+      <div class="petal" style="--rotate: 315deg;"></div>
+    </div>
+
+    <div class="message" id="message">
+      <p>I like u so much.</p>
+      <p><strong>Will u accept the offer?</strong></p>
+    </div>
+
+    <div class="heart" id="heart">❤️</div>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const triggerPoint = window.innerHeight * 0.4;
+
+      const content = document.getElementById('content');
+
+      if (scrollY > triggerPoint) {
+        content.classList.add('bloomed');
+        content.classList.add('show-message');
+      }
+    });
+  </script>
+
+</body>
+</html>
+
